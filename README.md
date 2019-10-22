@@ -1,1 +1,1 @@
-This is an application for video conferring.This applications is using sarxos-webcam api
+This is an application for video conferencing. This application is built using sarxos-webcam api.
