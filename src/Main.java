@@ -1,25 +1,16 @@
-package sample;
-
-import com.github.sarxos.webcam.Webcam;
-import com.github.sarxos.webcam.WebcamEvent;
-import com.github.sarxos.webcam.WebcamListener;
-import com.github.sarxos.webcam.WebcamResolution;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import javax.imageio.ImageIO;
-import java.awt.*;
-import java.io.File;
 import java.io.IOException;
 
 public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("WebcamWindow.fxml"));
         primaryStage.setTitle("Hello World");
         primaryStage.setScene(new Scene(root, 300, 275));
         primaryStage.show();
@@ -27,7 +18,8 @@ public class Main extends Application {
 
 
     public static void main(String[] args) throws IOException {
-        Webcam webcam=Webcam.getDefault();//if more than one webcam this will default webcam
+        launch(args);
+        /*Webcam webcam=Webcam.getDefault();//if more than one webcam this will default webcam
 //        for(Dimension supportedSize: webcam.getViewSizes()){//get list of available size suppoertwd by computer
 //            System.out.println(supportedSize.toString());
 //        }
@@ -57,6 +49,6 @@ public class Main extends Application {
         });
         webcam.open();
         ImageIO.write(webcam.getImage(),"JPG",new File("firstCapture.jpg"));
-        webcam.close();
+        webcam.close();*/
     }
 }
