@@ -55,9 +55,6 @@ public class Main extends Application {
                 System.out.println("Image Taken");
             }
         });
-
-
-
         webcam.open();
         ImageIO.write(webcam.getImage(),"JPG",new File("firstCapture.jpg"));
         webcam.close();
