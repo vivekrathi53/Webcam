@@ -10,10 +10,15 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("WebcamWindow.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("WebcamWindow.fxml"));
+        Parent root = fxmlLoader.load();
+        Controller controller = fxmlLoader.getController();
         primaryStage.setTitle("Hello World");
         primaryStage.setScene(new Scene(root, 300, 275));
         primaryStage.show();
+        VideoPlayerThread vpt = new VideoPlayerThread(controller.imagehold,controller.webcam);
+        Thread thread = new Thread(vpt);
+        thread.start();
     }
 
 
