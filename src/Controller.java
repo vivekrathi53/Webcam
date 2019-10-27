@@ -26,8 +26,8 @@ public class Controller {
     public Controller()throws IOException
     {
         webcam=Webcam.getDefault();
-        webcam.setViewSize(new Dimension(320,240));
-//        webcam.setViewSize(WebcamResolution.VGA.getSize());// better way to do above tas
+//        webcam.setViewSize(new Dimension(320,240));
+        webcam.setViewSize(WebcamResolution.VGA.getSize());// better way to do above tas
          webcam.addWebcamListener(new WebcamListener() {
             @Override
             public void webcamOpen(WebcamEvent webcamEvent) {
@@ -46,7 +46,7 @@ public class Controller {
 
             @Override
             public void webcamImageObtained(WebcamEvent webcamEvent) {
-                System.out.println("Image Taken");
+                //System.out.println("Image Taken");
             }
         });
         webcam.open();

@@ -19,6 +19,9 @@ public class Main extends Application {
         VideoPlayerThread vpt = new VideoPlayerThread(controller.imagehold,controller.webcam);
         Thread thread = new Thread(vpt);
         thread.start();
+        AudioPlayerThread apt = new AudioPlayerThread();
+        Thread thread1 = new Thread(apt);
+        thread1.start();
     }
 
 
