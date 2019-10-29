@@ -3,7 +3,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 
 public class Main extends Application {
@@ -22,6 +21,9 @@ public class Main extends Application {
         AudioPlayerThread apt = new AudioPlayerThread();
         Thread thread1 = new Thread(apt);
         thread1.start();
+        VideoReceiverThread vrt = new VideoReceiverThread(controller.imagehold,controller.webcam);
+        Thread t3 = new Thread(vrt);
+        t3.start();
     }
 
 

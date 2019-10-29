@@ -2,7 +2,6 @@
 import com.github.sarxos.webcam.Webcam;
 import com.github.sarxos.webcam.WebcamEvent;
 import com.github.sarxos.webcam.WebcamListener;
-import com.github.sarxos.webcam.WebcamResolution;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
@@ -26,8 +25,8 @@ public class Controller {
     public Controller()throws IOException
     {
         webcam=Webcam.getDefault();
-//        webcam.setViewSize(new Dimension(320,240));
-        webcam.setViewSize(WebcamResolution.VGA.getSize());// better way to do above tas
+       webcam.setViewSize(new Dimension(320,240));
+  //      webcam.setViewSize(WebcamResolution.VGA.getSize());// better way to do above tas
          webcam.addWebcamListener(new WebcamListener() {
             @Override
             public void webcamOpen(WebcamEvent webcamEvent) {
