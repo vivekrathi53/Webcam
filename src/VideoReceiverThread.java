@@ -9,6 +9,8 @@ import javax.swing.*;
 import java.awt.image.BufferedImage;
 import java.io.*;
 import java.net.*;
+import java.util.LinkedList;
+import java.util.Queue;
 
 import static java.lang.Thread.sleep;
 
@@ -20,6 +22,9 @@ public class VideoReceiverThread implements Runnable
     @Override
     public void run()
     {
+        int flag=0;
+        BufferedPlayer bp = new BufferedPlayer(new LinkedList<>(),imageView);
+        Thread t1 = new Thread(bp);
         try
         {
             DatagramSocket ds = new DatagramSocket(8188);
@@ -37,11 +42,18 @@ public class VideoReceiverThread implements Runnable
                 ObjectInputStream ois = new ObjectInputStream(bais2);
                 FramePacket fp = (FramePacket) ois.readObject();
                 data = fp.frameData;
-                ByteArrayInputStream bais = new ByteArrayInputStream(data);
-                BufferedImage bi = ImageIO.read(bais);
-                Image image = SwingFXUtils.toFXImage(bi, null);
-                imageView.setImage(image);
-              //  System.out.println("Image Set");
+                if(flag!=0)
+                {
+                    bp.addFramePacket(fp);
+                }
+                else
+                {
+                    flag=1;
+                    bp.addFramePacket(fp);
+                    t1.start();
+                }
+                //System.out.println(fp.counter);
+
             }
 
         }
@@ -52,6 +64,8 @@ public class VideoReceiverThread implements Runnable
     {
         imageView=temp;
         this.webcam=webcam;
+        //q=new LinkedList<byte[]>();
     }
 
 }
+

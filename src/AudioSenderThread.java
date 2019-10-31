@@ -33,23 +33,24 @@ public class AudioSenderThread implements Runnable
             //speakers.open(format);
           //  speakers.start();
             long i=0;// adjust condition of loop for extent of microphone use
-            while (i<10000000000L) {
-                i++;
+            while (i==0) {
+               // i++;
                 microphone.read(data, 0, CHUNK_SIZE);
                 //bytesRead += numBytesRead;
                 // write the mic data to a stream for use later
                 //out.write(data, 0, numBytesRead);
-                Synchroniser.increaseCounter();
-                AudioPacket ap = new AudioPacket(data,Synchroniser.getCounter());
+
+                AudioPacket ap = new AudioPacket(data, SendSynchronizer.getCounter());
                 ByteArrayOutputStream baos = new ByteArrayOutputStream();
                 ObjectOutputStream oos = new ObjectOutputStream(baos);
                 oos.writeObject(ap);
                 byte[] data2 = baos.toByteArray();
                 DatagramSocket ds = new DatagramSocket();
-                DatagramPacket dp = new DatagramPacket(data2,data2.length, InetAddress.getLocalHost(),51001);
+                DatagramPacket dp = new DatagramPacket(data2,data2.length, InetAddress.getLocalHost(),8189);
                 //System.out.println(data2.length);
                 ds.send(dp);
                 ds.close();
+                SendSynchronizer.increaseCounter();
                 // write mic data to stream for immediate playback
                 //speakers.write(data, 0, numBytesRead);
             }

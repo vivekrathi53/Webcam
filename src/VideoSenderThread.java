@@ -1,10 +1,7 @@
 import com.github.sarxos.webcam.Webcam;
-import javafx.embed.swing.SwingFXUtils;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 import javax.imageio.ImageIO;
-import javax.swing.*;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
@@ -41,7 +38,7 @@ public class VideoSenderThread implements Runnable
             try {
 
                 byte[] data = baos.toByteArray();
-                FramePacket fp = new FramePacket(data,Synchroniser.getCounter());
+                FramePacket fp = new FramePacket(data, SendSynchronizer.getCounter());
                 ByteArrayOutputStream baos2 = new ByteArrayOutputStream();
                 ObjectOutputStream oos = new ObjectOutputStream(baos2);
                 oos.writeObject(fp);

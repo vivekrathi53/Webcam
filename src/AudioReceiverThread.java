@@ -26,10 +26,10 @@ public class AudioReceiverThread implements Runnable
             speakers = (SourceDataLine) AudioSystem.getLine(dataLineInfo);
             speakers.open(format);
             speakers.start();
-            DatagramSocket ds = new DatagramSocket(51001);
+            DatagramSocket ds = new DatagramSocket(8189);
             long i=0;// adjust condition of loop for extent of microphone use
-            while (i<10000000000L) {
-                i++;
+            while (i==0) {
+              //  i++;
                 byte[] data2 = new byte[1700];
 
                 DatagramPacket dp = new DatagramPacket(data2,data2.length);
@@ -41,6 +41,8 @@ public class AudioReceiverThread implements Runnable
                 AudioPacket ap = (AudioPacket)ois.readObject();
                 byte data[]=ap.audioData;
                 speakers.write(data, 0, data.length);
+               // System.out.println("Audio "+ap.counter);
+                ReceiveSynchronizer.setCounter(ap.counter);
             }
             speakers.drain();
             speakers.close();

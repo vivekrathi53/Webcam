@@ -1,4 +1,4 @@
-public class Synchroniser
+public class SendSynchronizer
 {
     private static int counter=0;
     static int getCounter()
