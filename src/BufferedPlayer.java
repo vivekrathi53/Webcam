@@ -1,4 +1,6 @@
+import javafx.application.Platform;
 import javafx.embed.swing.SwingFXUtils;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
@@ -13,9 +15,11 @@ public class BufferedPlayer implements Runnable
 {
     Queue<FramePacket > q;
     ImageView imageView;
-    public BufferedPlayer(Queue<FramePacket> q, ImageView imageView) {
+    Label loadingLabel;
+    public BufferedPlayer(Queue<FramePacket> q, ImageView imageView, Label loadingLabel) {
         this.q = q;
         this.imageView = imageView;
+        this.loadingLabel=loadingLabel;
     }
     public void addFramePacket(FramePacket fp)
     {
@@ -25,8 +29,14 @@ public class BufferedPlayer implements Runnable
     @Override
     public void run()
     {
+        try {
+            sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         while(true)
         {
+
             try
             {
                 if(q.peek().counter==ReceiveSynchronizer.getCounter())
@@ -37,11 +47,34 @@ public class BufferedPlayer implements Runnable
                     imageView.setImage(image);
                     q.remove();
                     sleep(7);
+                    Platform.runLater(new Runnable()//To perform UI work from different Thread
+                    {
+                        @Override
+                        public void run() {
+                           loadingLabel.setText("Live");
+                        }
+                    });
                 }
                 else if(q.peek().counter<ReceiveSynchronizer.getCounter())
+                {
+                    Platform.runLater(new Runnable()//To perform UI work from different Thread
+                    {
+                        @Override
+                        public void run() {
+                            loadingLabel.setText("Loading");
+                        }
+                    });
                     q.remove();
+                }
                 else
                 {
+                    Platform.runLater(new Runnable()//To perform UI work from different Thread
+                    {
+                        @Override
+                        public void run() {
+                            loadingLabel.setText("Loading");
+                        }
+                    });
                     sleep(7);
                 }
             }

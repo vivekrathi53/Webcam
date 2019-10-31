@@ -4,9 +4,11 @@ import com.github.sarxos.webcam.WebcamEvent;
 import com.github.sarxos.webcam.WebcamListener;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javax.imageio.ImageIO;
+
 import java.awt.*;
 import java.io.File;
 
@@ -19,6 +21,8 @@ public class Controller {
     Button captureButton;
     @FXML
     AnchorPane anchorPane;
+    @FXML
+    Label loadingLabel;
 
     Webcam webcam;
 

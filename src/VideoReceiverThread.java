@@ -1,29 +1,24 @@
 import com.github.sarxos.webcam.Webcam;
-import javafx.embed.swing.SwingFXUtils;
-import javafx.scene.image.Image;
+
+import javafx.scene.control.Label;
+
 import javafx.scene.image.ImageView;
 
-import javax.imageio.ImageIO;
-import javax.imageio.ImageReader;
-import javax.swing.*;
-import java.awt.image.BufferedImage;
 import java.io.*;
 import java.net.*;
 import java.util.LinkedList;
-import java.util.Queue;
-
-import static java.lang.Thread.sleep;
 
 
 public class VideoReceiverThread implements Runnable
 {
     ImageView imageView;
     Webcam webcam;
+    Label loadingLabel;
     @Override
     public void run()
     {
         int flag=0;
-        BufferedPlayer bp = new BufferedPlayer(new LinkedList<>(),imageView);
+        BufferedPlayer bp = new BufferedPlayer(new LinkedList<>(),imageView,loadingLabel);
         Thread t1 = new Thread(bp);
         try
         {
@@ -60,10 +55,11 @@ public class VideoReceiverThread implements Runnable
         catch(Exception e)
         {}
     }
-    public VideoReceiverThread(ImageView temp,Webcam webcam)
+    public VideoReceiverThread(ImageView temp,Webcam webcam,Label loadingLabel)
     {
         imageView=temp;
         this.webcam=webcam;
+        this.loadingLabel=loadingLabel;
         //q=new LinkedList<byte[]>();
     }
 

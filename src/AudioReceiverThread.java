@@ -30,7 +30,7 @@ public class AudioReceiverThread implements Runnable
             long i=0;// adjust condition of loop for extent of microphone use
             while (i==0) {
               //  i++;
-                byte[] data2 = new byte[1700];
+                byte[] data2 = new byte[10400];
 
                 DatagramPacket dp = new DatagramPacket(data2,data2.length);
                // System.out.printf("Receiving");

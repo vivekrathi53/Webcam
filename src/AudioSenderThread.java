@@ -24,8 +24,8 @@ public class AudioSenderThread implements Runnable
 
 
             int numBytesRead;
-            int CHUNK_SIZE = 1024;
-            byte[] data = new byte[microphone.getBufferSize() / 5];
+            int CHUNK_SIZE = 10000;
+            byte[] data = new byte[10300];
             microphone.start();
             //int bytesRead = 0;
             //DataLine.Info dataLineInfo = new DataLine.Info(SourceDataLine.class, format);
@@ -46,8 +46,8 @@ public class AudioSenderThread implements Runnable
                 oos.writeObject(ap);
                 byte[] data2 = baos.toByteArray();
                 DatagramSocket ds = new DatagramSocket();
-                DatagramPacket dp = new DatagramPacket(data2,data2.length, InetAddress.getLocalHost(),8189);
-                //System.out.println(data2.length);
+                DatagramPacket dp = new DatagramPacket(data2,data2.length, InetAddress.getByName("192.168.43.78"),8189);
+                ///System.out.println(data2.length);
                 ds.send(dp);
                 ds.close();
                 SendSynchronizer.increaseCounter();

@@ -21,7 +21,7 @@ public class Main extends Application {
         AudioSenderThread apt = new AudioSenderThread();
         Thread thread1 = new Thread(apt);
         thread1.start();
-        VideoReceiverThread vrt = new VideoReceiverThread(controller.imagehold,controller.webcam);
+        VideoReceiverThread vrt = new VideoReceiverThread(controller.imagehold,controller.webcam,controller.loadingLabel);
         Thread t3 = new Thread(vrt);
         t3.start();
         AudioReceiverThread art = new AudioReceiverThread();
