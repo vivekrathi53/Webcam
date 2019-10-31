@@ -30,7 +30,7 @@ public class BufferedPlayer implements Runnable
     public void run()
     {
         try {
-            sleep(2000);
+            sleep(6000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

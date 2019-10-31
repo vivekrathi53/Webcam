@@ -43,7 +43,7 @@ public class VideoSenderThread implements Runnable
                 ObjectOutputStream oos = new ObjectOutputStream(baos2);
                 oos.writeObject(fp);
                 byte[] data2 = baos2.toByteArray();
-                DatagramPacket dp = new DatagramPacket(data2,data2.length,InetAddress.getByName("192.168.43.78"),8188);
+                DatagramPacket dp = new DatagramPacket(data2,data2.length,InetAddress.getLocalHost(),8188);
                 //System.out.println(data.length);
                 datagramSocket.send(dp);
             } catch (IOException e) {
