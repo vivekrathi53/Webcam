@@ -46,7 +46,7 @@ public class BufferedPlayer implements Runnable
                     Image image = SwingFXUtils.toFXImage(bi, null);
                     imageView.setImage(image);
                     q.remove();
-                    sleep(7);
+                    sleep(20);
                     Platform.runLater(new Runnable()//To perform UI work from different Thread
                     {
                         @Override
@@ -65,6 +65,7 @@ public class BufferedPlayer implements Runnable
                         }
                     });
                     q.remove();
+                    sleep(20);
                 }
                 else
                 {
@@ -75,7 +76,7 @@ public class BufferedPlayer implements Runnable
                             loadingLabel.setText("Loading");
                         }
                     });
-                    sleep(7);
+                    sleep(20);
                 }
             }
             catch(Exception e)
