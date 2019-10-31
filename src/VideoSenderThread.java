@@ -13,7 +13,7 @@ import java.net.*;
 import static java.lang.Thread.sleep;
 
 
-public class VideoPlayerThread implements Runnable
+public class VideoSenderThread implements Runnable
 {
     ImageView imageView;
     Webcam webcam;
@@ -41,7 +41,12 @@ public class VideoPlayerThread implements Runnable
             try {
 
                 byte[] data = baos.toByteArray();
-                DatagramPacket dp = new DatagramPacket(data,data.length,InetAddress.getLocalHost(),8188);
+                FramePacket fp = new FramePacket(data,Synchroniser.getCounter());
+                ByteArrayOutputStream baos2 = new ByteArrayOutputStream();
+                ObjectOutputStream oos = new ObjectOutputStream(baos2);
+                oos.writeObject(fp);
+                byte[] data2 = baos2.toByteArray();
+                DatagramPacket dp = new DatagramPacket(data2,data2.length,InetAddress.getLocalHost(),8188);
                 //System.out.println(data.length);
                 datagramSocket.send(dp);
             } catch (IOException e) {
@@ -54,7 +59,7 @@ public class VideoPlayerThread implements Runnable
             }
         }
     }
-    public VideoPlayerThread(ImageView temp,Webcam webcam)
+    public VideoSenderThread(ImageView temp, Webcam webcam)
     {
         imageView=temp;
         this.webcam=webcam;

@@ -15,15 +15,18 @@ public class Main extends Application {
         primaryStage.setTitle("Hello World");
         primaryStage.setScene(new Scene(root, 300, 275));
         primaryStage.show();
-        VideoPlayerThread vpt = new VideoPlayerThread(controller.imagehold,controller.webcam);
+        VideoSenderThread vpt = new VideoSenderThread(controller.imagehold,controller.webcam);
         Thread thread = new Thread(vpt);
         thread.start();
-        AudioPlayerThread apt = new AudioPlayerThread();
+        AudioSenderThread apt = new AudioSenderThread();
         Thread thread1 = new Thread(apt);
         thread1.start();
         VideoReceiverThread vrt = new VideoReceiverThread(controller.imagehold,controller.webcam);
         Thread t3 = new Thread(vrt);
         t3.start();
+        AudioReceiverThread art = new AudioReceiverThread();
+        Thread t2 = new Thread(art);
+        t2.start();
     }
 
 

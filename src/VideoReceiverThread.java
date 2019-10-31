@@ -27,11 +27,16 @@ public class VideoReceiverThread implements Runnable
             {
                 //Image image = SwingFXUtils.toFXImage(webcam.getImage(), null);
                 //  imageView.setImage(image);
-                byte[] data  = new byte[200000];
-                DatagramPacket dp = new DatagramPacket(data,data.length);
+                byte[] data;
+                byte[] data2 = new byte[200000];
+                DatagramPacket dp = new DatagramPacket(data2,data2.length);
                 //System.out.printf("Receiving");
                 ds.receive(dp);
                 //System.out.printf("Received");
+                ByteArrayInputStream bais2 = new ByteArrayInputStream(data2);
+                ObjectInputStream ois = new ObjectInputStream(bais2);
+                FramePacket fp = (FramePacket) ois.readObject();
+                data = fp.frameData;
                 ByteArrayInputStream bais = new ByteArrayInputStream(data);
                 BufferedImage bi = ImageIO.read(bais);
                 Image image = SwingFXUtils.toFXImage(bi, null);
